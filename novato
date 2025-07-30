@@ -1,1 +1,79 @@
+/* Represente o Tabuleiro: Utilize uma matriz (array bidimensional) para representar o tabuleiro do Batalha Naval.
+Neste nível novato, o tabuleiro terá um tamanho fixo 10x10. Inicialize todas as posições do tabuleiro com o valor 0,
+representando água. Posicione os Navios: Declare e inicialize dois vetores (arrays unidimensionais) para representar os navios.
+Cada navio ocupará um número fixo de posições no tabuleiro (defina esse tamanho, por exemplo, 3 posições).
+Um navio será posicionado horizontalmente e o outro verticalmente. Represente as posições ocupadas pelos navios
+na matriz do tabuleiro com o valor 3. Você deverá escolher as coordenadas iniciais de cada navio e garantir que eles estejam
+completamente dentro dos limites do tabuleiro e não se sobreponham. Dica: O posicionamento do navio pode ser feito
+copiando o valor 3 de cada posição do vetor do navio para as posições correspondentes na matriz do tabuleiro,
+ de acordo com a orientação (horizontal ou vertical) do naviExiba o Tabuleiro: Utilize loops aninhados
+e o comando printf para exibir o tabuleiro no console. Mostre a matriz completa, com 0s representando água
+e 3s representando as partes dos navios. A saída deve ser clara e organizada, permitindo visualizar facilmente a posição dos navios.
+Dica: Imprima um espaço ou outro caractere separador entre os elementos da matriz para facilitar a visualização.
+Requisitos funcionais O programa deve receber as coordenadas iniciais (linha e coluna) de cada navio como entrada
+(pode ser definido diretamente no código). O programa deve validar se as coordenadas e o tamanho dos navios
+são válidos dentro dos limites do tabuleiro. O programa deve garantir que os navios não se sobreponham. O programa deve exibir o
+tabuleiro no console com os navios posicionados corretamente.
+Requisitos não funcionais
+Performance: O programa deve executar de forma eficiente, sem causar atrasos perceptíveis.
+ Documentação: O código deve ser bem documentado, com comentários claros explicando a lógica e o
+  propósito de cada parte do programa. Utilize comentários para explicar a função de cada variável, loop e bloco de código.
+ Legibilidade: O código deve ser escrito de forma clara, organizada e fácil de entender, com nomes de variáveis descritivos e indentação consistente.
+O tamanho do tabuleiro e dos navios é fixo (10x10). Os navios têm tamanho fixo igual a 3.
+ As coordenadas dos navios são definidas diretamente no código, sem input do usuário. Não é necessário implementar a lógica do jogo
+(ataques, acertos, etc.) neste nível.
+A validação de sobreposição de navios pode ser simplificada.Represente o Tabuleiro: Utilize uma matriz (array bidimensional) 
+para representar o tabuleiro do Batalha Naval. Neste nível novato, o tabuleiro terá um tamanho fixo 10x10. Inicialize todas as posições do tabuleiro com o valor 0, representando água.
+Posicione os Navios: Declare e inicialize dois vetores (arrays unidimensionais) para representar os navios.
+Cada navio ocupará um número fixo de posições no tabuleiro (defina esse tamanho, por exemplo, 3 posições). 
+Um navio será posicionado horizontalmente e o outro verticalmente. Represente as posições ocupadas pelos navios na matriz do tabuleiro com o valor 3.
+Você deverá escolher as coordenadas iniciais de cada navio e garantir que eles estejam completamente dentro dos limites do tabuleiro e não se sobreponham.
+Dica: O posicionamento do navio pode ser feito copiando o valor 3 de cada posição do vetor do navio para as posições correspondentes
+na matriz do tabuleiro, de acordo com a orientação (horizontal ou vertical) do navio.
+Exiba o Tabuleiro: Utilize loops aninhados e o comando printf para exibir o tabuleiro no console.
+ Mostre a matriz completa, com 0s representando água e 3s representando as partes dos navios.
+  A saída deve ser clara e organizada, permitindo visualizar facilmente a posição dos navios.
+Dica: Imprima um espaço ou outro caractere separador entre os elementos da matriz para facilitar a visualização.
+Requisitos funcionais O programa deve receber as coordenadas iniciais (linha e coluna) de cada navio como entrada
+ (pode ser definido diretamente no código). O programa deve validar se as coordenadas e o tamanho dos navios são válidos
+  dentro dos limites do tabuleiro. O programa deve garantir que os navios não se sobreponham.
+ O programa deve exibir o tabuleiro no console com os navios posicionados corretamente.*/
 
+#include <stdio.h>
+#define TAMANHO_TABULEIRO 10
+#define TAMANHO_NAVIO 3
+//batalha naval novato
+int main() {
+    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO] = {0};
+    int navioHorizontal[TAMANHO_NAVIO] = {3, 3, 3};
+    int navioVertical[TAMANHO_NAVIO] = {3, 3, 3};
+
+// Posiciona o navio horizontalmente
+    int linhaHorizontal = 0;
+    int colunaHorizontal = 0;
+
+    for (int i = 0; i < TAMANHO_NAVIO; i++) { // Verifica se a posição está dentro dos limites do tabuleiro
+        if (colunaHorizontal + i >= TAMANHO_TABULEIRO) {
+            printf("Posição inválida para o navio horizontal.\n");
+            return 1; // Encerra o programa com erro
+    }
+    tabuleiro[linhaHorizontal][colunaHorizontal + i] = navioHorizontal[i]; //posiciona o navio na horizontal
+}
+    // Posiciona o navio verticalmente
+    int linhaVertical = 0;
+    int colunaVertical = 1;
+
+    for (int i = 0; i < TAMANHO_NAVIO; i++) { // Verifica se a posição está dentro dos limites do tabuleiro
+        tabuleiro[linhaVertical + i][colunaVertical] = navioVertical[i]; //posiciona o navio na vertical
+}
+    // Exibe o tabuleiro
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) { //percorre as linhas do tabuleiro
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) { //percorre as colunas do tabuleiro
+            printf("%d ", tabuleiro[i][j]); // imprime o valor da posição do tabuleiro
+    }
+    printf("\n");
+    }
+
+    return 0;
+
+}
