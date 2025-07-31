@@ -1,0 +1,75 @@
+#include <stdio.h>
+#define TAMANHO_TABULEIRO 10 
+#define TAMANHO_NAVIO 3 
+#define VALOR_AGUA 0 
+#define VALOR_NAVIO 3 
+
+
+void inicializarTabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) { // Inicializa o tabuleiro com água
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) { // Percorre as linhas do tabuleiro
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) { // Percorre as colunas do tabuleiro
+            tabuleiro[i][j] = VALOR_AGUA; // Define cada posição como água (0)
+        }
+    }
+}
+
+void exibirTabuleiro(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) { // Exibe o tabuleiro no console
+    printf("Tabuleiro:\n");
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) { // Percorre as linhas do tabuleiro
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) { // Percorre cada posição do tabuleiro
+            printf("%d ", tabuleiro[i][j]);  // Imprime o valor da posição (0 para água, 3 para navio)
+        }
+        printf("\n");
+    }
+}
+void posicionarNavioHorizontal(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha, int coluna) { // Posiciona
+    for (int i = 0; i < TAMANHO_NAVIO; i++) { // Percorre o tamanho do navio
+        tabuleiro[linha][coluna + i] = VALOR_NAVIO;    // Define cada posição do navio como 3 (navio)
+    }
+}
+
+void posicionarNavioVertical(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha, int coluna) { // Posiciona u
+    for (int i = 0; i < TAMANHO_NAVIO; i++) { // Percorre o tamanho do navio
+        tabuleiro[linha + i][coluna] = VALOR_NAVIO; // Define cada posição do navio como 3 (navio)
+    }
+}
+
+void posicionarNavioDiagonal(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha, int coluna) { // Posiciona u
+    if (linha + TAMANHO_NAVIO > TAMANHO_TABULEIRO || coluna + TAMANHO_NAVIO > TAMANHO_TABULEIRO) { // Verifica se o navio
+        printf("Posição inválida para navio diagonal.\n"); // Exibe mensagem de erro se o navio não cabe
+        return; // Retorna da função se a posição for inválida
+    }
+    for (int i = 0; i < TAMANHO_NAVIO; i++) { // Percorre o tamanho do navio
+        tabuleiro[linha + i][coluna + i] = VALOR_NAVIO; // Define cada posição do navio como 3 (navio)
+    }
+}
+void posicionarNavioDiagonalInverso(int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO], int linha, int coluna) { // Posi
+    if (linha + TAMANHO_NAVIO > TAMANHO_TABULEIRO || coluna - TAMANHO_NAVIO < -1) { // Verifica se o navio cabe no tabule
+        printf("Posição inválida para navio diagonal inverso.\n"); // Exibe mensagem de erro se o navio não cabe
+        return; // Retorna da função se a posição for inválida
+    }
+    for (int i = 0; i < TAMANHO_NAVIO; i++) { // Percorre o tamanho do navio
+        tabuleiro[linha + i][coluna - i] = VALOR_NAVIO; // Define cada posição do navio como 3 (navio)
+    }
+} 
+int main() { // Função principal do programa
+    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]; // Declara o tabuleiro como uma matriz 10x10
+    
+    // Inicializa o tabuleiro
+    inicializarTabuleiro(tabuleiro);
+    
+    // Posiciona os navios
+    posicionarNavioHorizontal(tabuleiro, 0, 0); // Navio horizontal na linha 0, coluna 0
+    posicionarNavioVertical(tabuleiro, 1, 1);   // Navio vertical na linha 1, coluna 1
+    posicionarNavioDiagonal(tabuleiro, 2, 2);   // Navio diagonal na linha 2, coluna 2
+    posicionarNavioDiagonalInverso(tabuleiro, 3, 9); // Navio diagonal inverso na linha 3, coluna 9
+    
+    // Exibe o tabuleiro
+    exibirTabuleiro(tabuleiro);
+    
+    return 0;
+} 
+  
+  
+
+    
