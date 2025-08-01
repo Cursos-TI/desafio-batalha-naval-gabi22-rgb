@@ -1,0 +1,120 @@
+
+#include <locale.h>
+#include <stdio.h>
+#define TAMANHO 5
+#define CONE_SIZE 5
+#define CRUZ_SIZE 5
+#define OCTAEDRO_SIZE 5
+#define HABILIDADE_AREAS 5
+#define HABILIDADE_OCTAEDRO 5
+#define HABILIDADE_CONE 5
+#define HABILIDADE_CRUZ 5
+
+void exibirTabuleiro(int tabuleiro[TAMANHO][TAMANHO]) {
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            if (tabuleiro[i][j] == 0) {
+                printf("agua ");
+            } else if (tabuleiro[i][j] == 3) {
+                printf("Navio ");
+            } else if (tabuleiro[i][j] == 5) {
+                printf("Habilidade ");
+            }
+        }
+        printf("\n");
+    }
+}
+void aplicarHabilidadeCone(int tabuleiro[TAMANHO][TAMANHO], int origemLinha, int origemColuna) {
+    int cone[CONE_SIZE][CONE_SIZE] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}
+    };
+
+    for (int i = 0; i < CONE_SIZE; i++) {
+        for (int j = 0; j < CONE_SIZE; j++) {
+            if (cone[i][j] == 1) {
+                int linha = origemLinha - CONE_SIZE / 2 + i;
+                int coluna = origemColuna - CONE_SIZE / 2 + j;
+                if (linha >= 0 && linha < TAMANHO && coluna >= 0 && coluna < TAMANHO) {
+                    tabuleiro[linha][coluna] = (tabuleiro[linha][coluna] == 3) ? tabuleiro[linha][coluna] : 5;
+                }
+            }
+        }
+    }
+}
+
+void aplicarHabilidadeCruz(int tabuleiro[TAMANHO][TAMANHO], int origemLinha, int origemColuna) {
+    int cruz[CRUZ_SIZE][CRUZ_SIZE] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    for (int i = 0; i < CRUZ_SIZE; i++) {
+        for (int j = 0; j < CRUZ_SIZE; j++) {
+            if (cruz[i][j] == 1) {
+                int linha = origemLinha - CRUZ_SIZE / 2 + i;
+                int coluna = origemColuna - CRUZ_SIZE / 2 + j;
+                if (linha >= 0 && linha < TAMANHO && coluna >= 0 && coluna < TAMANHO) {
+                    tabuleiro[linha][coluna] = (tabuleiro[linha][coluna] == 3) ? tabuleiro[linha][coluna] : 5;
+                }
+            }
+        }
+    }
+}
+
+void aplicarHabilidadeOctaedro(int tabuleiro[TAMANHO][TAMANHO], int origemLinha, int origemColuna) {
+    int octaedro[OCTAEDRO_SIZE][OCTAEDRO_SIZE] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    for (int i = 0; i < OCTAEDRO_SIZE; i++) {
+        for (int j = 0; j < OCTAEDRO_SIZE; j++) {
+            if (octaedro[i][j] == 1) {
+                int linha = origemLinha - OCTAEDRO_SIZE / 2 + i;
+                int coluna = origemColuna - OCTAEDRO_SIZE / 2 + j;
+                if (linha >= 0 && linha < TAMANHO && coluna >= 0 && coluna < TAMANHO) {
+                    tabuleiro[linha][coluna] = (tabuleiro[linha][coluna] == 3) ? tabuleiro[linha][coluna] : 5;
+                }
+            }
+        }
+    }
+}
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+    int tabuleiro[TAMANHO][TAMANHO] = {
+        {0, 0, 3, 0, 0},
+        {0, 3, 3, 3, 0},
+        {3, 3, 3, 3, 3},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}
+    };
+
+    printf("Tabuleiro inicial:\n");
+    exibirTabuleiro(tabuleiro);
+
+    // Aplicando habilidades
+    aplicarHabilidadeCone(tabuleiro, 2, 2);
+    printf("\nTabuleiro após aplicar habilidade Cone:\n");
+    exibirTabuleiro(tabuleiro);
+
+    aplicarHabilidadeCruz(tabuleiro, 2, 2);
+    printf("\nTabuleiro após aplicar habilidade Cruz:\n");
+    exibirTabuleiro(tabuleiro);
+
+    aplicarHabilidadeOctaedro(tabuleiro, 2, 2);
+    printf("\nTabuleiro após aplicar habilidade Octaedro:\n");
+    exibirTabuleiro(tabuleiro);
+
+    return 0;
+}
+
